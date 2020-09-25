@@ -1,0 +1,52 @@
+@startuml
+
+skinparam linetype ortho
+
+entity Profile {
+  * id: Int
+  * name: String
+  * user: User
+  * userId: Int
+}
+
+entity User {
+  * id: Int
+  profile: Profile?
+  friends: User[]?
+  friendOf: User[]?
+  posts: Post[]?
+  likedPosts: Post[]?
+  comments: Comment[]?
+  likedComments: Comment[]?
+}
+
+entity Post {
+  * id: Int
+  * content: String
+  * createdAt: DateTime
+  * author: User
+  * authorId: Int
+  likedBy: User[]?
+  comments: Comment[]?
+}
+
+entity Comment {
+  * id: Int
+  * content: String
+  * createdAt: DateTime
+  * post: Post
+  * postId: Int
+  parentComment: Comment?
+  parentCommentId: Int?
+  childComments: Comment[]?
+  * author: User
+  * authorId: Int
+  likedBy: User[]?
+}
+
+Profile |o..|| User
+Profile |o..|| User
+User ||..o{ Post
+User ||..o{ Comment
+
+@enduml
