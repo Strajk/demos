@@ -7,6 +7,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 model Profile {
   id     Int    @default(autoincrement()) @id
   name   String

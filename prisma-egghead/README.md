@@ -22,6 +22,10 @@ npx prisma generate # will generate client code into node_modules
 
 #### UML
 
+* https://github.com/notiz-dev/prisma-dbml-generator
+  * generated 
+* prisma-uml
+
 ```
 npx prisma-uml ./prisma/schema.prisma
 npx prisma-uml ./prisma/schema.prisma > uml-erd.plantuml
