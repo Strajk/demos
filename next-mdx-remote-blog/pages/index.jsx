@@ -5,12 +5,12 @@ import Link from 'next/link'
 
 const root = process.cwd()
 
-export default function IndexPage({ postData }) {
+export default function IndexPage({ posts }) {
   return (
     <>
       <h1>My Cool Blog</h1>
       <ul>
-        {postData.map((data) => (
+        {posts.map((data) => (
           <li>
             <Link href="/blog/[slug]" as={`/blog/${data.slug}`}>
               <a>{data.frontMatter.title}</a>
@@ -24,7 +24,7 @@ export default function IndexPage({ postData }) {
 
 export async function getStaticProps() {
   const contentRoot = path.join(root, 'content')
-  const postData = fs.readdirSync(contentRoot).map((p) => {
+  const posts = fs.readdirSync(contentRoot).map((p) => {
     const content = fs.readFileSync(path.join(contentRoot, p), 'utf8')
     return {
       slug: p.replace(/\.mdx/, ''),
@@ -32,5 +32,5 @@ export async function getStaticProps() {
       frontMatter: matter(content).data,
     }
   })
-  return { props: { postData } }
+  return { props: { posts } }
 }
